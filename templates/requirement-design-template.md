@@ -1,4 +1,4 @@
-# <Requirement Title> Requirement Design
+# <需求标题> 需求设计
 
 日期：YYYY-MM-DD
 状态：草案
@@ -6,26 +6,26 @@
 总控：AlembicWorkspace
 原始计划：<link>
 
-## Confirmed Goal
+## 已确认目标
 
-State the confirmed user goal and final completion definition.
+写清已确认的用户目标和最终完成定义。
 
-## User Scenario
+## 用户场景
 
-Describe how the user or developer will experience the capability.
+描述用户或开发者会如何使用、感知或验证这个能力。
 
-## Functional Closure
+## 功能闭环
 
-- Inputs:
-- Outputs:
-- State changes:
-- Producers:
-- Consumers:
-- Failure paths:
+- 输入：
+- 输出：
+- 状态变化：
+- 生产方：
+- 消费方：
+- 失败路径：
 
-## Repository Boundary
+## 仓库边界
 
-| Repository / Window | Role | In Scope | Out of Scope |
+| 仓库 / 窗口 | 职责 | 包含范围 | 不包含范围 |
 | --- | --- | --- | --- |
 | Alembic |  |  |  |
 | AlembicCore |  |  |  |
@@ -34,56 +34,56 @@ Describe how the user or developer will experience the capability.
 | AlembicPlugin |  |  |  |
 | AlembicTest |  |  |  |
 
-## Code Facts And Research Gaps
+## 代码事实与调研缺口
 
-Known facts:
-
-- ...
-
-Research needed:
+已知事实：
 
 - ...
 
-## Design Options
+需要补充调研：
 
-### Option A
+- ...
 
-- Description:
-- Pros:
-- Risks:
+## 设计选项
 
-### Option B
+### 选项 A
 
-- Description:
-- Pros:
-- Risks:
+- 描述：
+- 优点：
+- 风险：
 
-## Recommended Design
+### 选项 B
 
-Explain the recommended direction and why it fits Alembic's current architecture.
+- 描述：
+- 优点：
+- 风险：
 
-## Phase Candidates
+## 推荐方案
+
+说明推荐方向，以及它为什么适合 Alembic 当前架构。
+
+## 阶段候选
 
 1. ...
 
-## Validation Strategy
+## 验证策略
 
-- Minimal verification:
-- Integration verification:
-- Test-window handoff:
+- 最小验证：
+- 集成验证：
+- 测试窗口交接：
 
-## Non-Goals And Forbidden Shortcuts
+## 非目标与禁止捷径
 
 - ...
 
-## Open Questions
+## 开放问题
 
 1. ...
 
-## Workspace Handoff Readiness
+## Workspace 交接准备状态
 
-Mark one:
+标记一项：
 
-- Draft only.
-- Ready for user confirmation.
-- Ready for AlembicWorkspace review.
+- 仅草案。
+- 准备给用户确认。
+- 准备交给 AlembicWorkspace 评审。

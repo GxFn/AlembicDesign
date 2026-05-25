@@ -1,36 +1,36 @@
-# <Requirement Title> Workspace Handoff
+# <需求标题> Workspace 交接
 
 日期：YYYY-MM-DD
 状态：草案
 来源窗口：AlembicDesign
 接收窗口：AlembicWorkspace
 
-## Summary
+## 摘要
 
-Briefly state what AlembicWorkspace should review.
+简要说明 `AlembicWorkspace` 需要评审什么。
 
-## User-Confirmed Goal
-
-...
-
-## Final Completion Definition
+## 用户已确认目标
 
 ...
 
-## Recommended Next Step
+## 最终完成定义
 
-Choose one:
+...
 
-- Add to TODO.
-- Start original-plan confirmation in AlembicWorkspace.
-- Start requirement design / code research.
-- Create goal-stage confirmation.
-- Create a wave plan.
-- Pause for user confirmation.
+## 建议下一步
 
-## Proposed Repository Coverage
+选择一项：
 
-| Window | Suggested Role | Dependency |
+- 加入 TODO。
+- 在 AlembicWorkspace 启动原始计划确认。
+- 启动需求设计 / 代码调研。
+- 创建目标阶段确认。
+- 创建 wave 计划。
+- 暂停，等待用户确认。
+
+## 建议仓库覆盖
+
+| 窗口 | 建议职责 | 依赖 |
 | --- | --- | --- |
 | Alembic |  |  |
 | AlembicCore |  |  |
@@ -39,17 +39,17 @@ Choose one:
 | AlembicPlugin |  |  |
 | AlembicTest |  |  |
 
-## Evidence And Links
+## 证据与链接
 
-- Original plan:
-- Requirement design:
-- User decisions:
-- Open research:
+- 原始计划：
+- 需求设计：
+- 用户决策：
+- 待补调研：
 
-## Risks
+## 风险
 
 - ...
 
-## Open Questions For AlembicWorkspace
+## 给 AlembicWorkspace 的开放问题
 
 1. ...

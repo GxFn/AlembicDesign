@@ -1,11 +1,11 @@
-# Current Design Drafts
+# 当前设计草案
 
-This directory is intentionally empty at initialization.
+本目录初始化时保持为空。
 
-Use it for active requirement discussion artifacts only:
+这里只保存活跃需求讨论材料：
 
 - `*-original-plan-YYYY-MM-DD.md`
 - `*-requirement-design-YYYY-MM-DD.md`
 - `*-workspace-handoff-YYYY-MM-DD.md`
 
-When a design is accepted by AlembicWorkspace, the workspace controller decides whether to copy, link, archive, or convert it into workspace requirement / wave documents.
+当设计被 `AlembicWorkspace` 接收后，由总控窗口决定是复制、链接、归档，还是转换成 workspace 需求 / wave 文档。

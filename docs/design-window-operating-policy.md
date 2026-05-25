@@ -1,57 +1,57 @@
-# AlembicDesign Operating Policy
+# AlembicDesign 运行规则
 
 更新日期：2026-05-25
 
-## Purpose
+## 目的
 
-AlembicDesign separates requirement discussion from implementation dispatch. It gives the user a focused place to explore ideas while AlembicWorkspace remains the controller for execution, acceptance, TODO ownership, and archive.
+`AlembicDesign` 将需求讨论与实现派发拆开。它给用户一个专门讨论想法、打磨需求和比较方案的窗口；`AlembicWorkspace` 仍然是执行、验收、TODO 归口和归档的总控。
 
-## Control Relationship
+## 控制关系
 
-- AlembicWorkspace owns final state, current mainline, TODO priority, window dispatch, test handoff, acceptance, and archive.
-- AlembicDesign owns exploratory requirement discussion and design draft preparation.
-- A design draft does not become executable work until AlembicWorkspace accepts it and creates the relevant workspace confirmation / wave documents.
+- `AlembicWorkspace` 负责最终状态、当前主线、TODO 优先级、窗口派发、测试交接、验收和归档。
+- `AlembicDesign` 负责探索性需求讨论和设计草案准备。
+- 设计草案只有在 `AlembicWorkspace` 接收并创建对应 workspace 确认 / wave 文档后，才会变成可执行工作。
 
-## Allowed Work
+## 允许事项
 
-- Clarify product goals and user scenarios.
-- Draft original plans and requirement designs.
-- Compare architecture options and tradeoffs.
-- Identify code-research requests for AlembicWorkspace or source-repo windows.
-- Produce workspace handoff drafts.
-- Maintain design-window templates and local design docs.
+- 澄清产品目标和用户场景。
+- 起草原始计划书和需求设计。
+- 比较架构方案和取舍。
+- 识别需要 `AlembicWorkspace` 或源码仓库窗口补充的代码调研请求。
+- 产出 workspace 交接草案。
+- 维护设计窗口模板和本地设计文档。
 
-## Forbidden Work
+## 禁止事项
 
-- Product source changes.
-- Direct test execution for real projects.
-- Direct cross-repo task dispatch.
-- Changing AlembicWorkspace current status as the source of truth.
-- Writing secrets, private tokens, or user machine-specific data into long-term docs.
+- 修改产品源码。
+- 直接执行真实项目测试。
+- 直接跨仓库派发任务。
+- 作为权威来源修改 `AlembicWorkspace` 当前状态。
+- 将密钥、私有 token 或用户机器特定信息写入长期文档。
 
-## Handoff Contract
+## 交接契约
 
-Each handoff to AlembicWorkspace should include:
+每次交回 `AlembicWorkspace` 的交接草案应包含：
 
-1. Requirement title and user goal.
-2. Design status: draft, user-confirmed, blocked, or ready for workspace review.
-3. Final completion definition.
-4. Known facts and evidence.
-5. Open questions and decisions.
-6. Proposed repository coverage.
-7. Suggested phase order.
-8. Validation requirements.
-9. Non-goals and forbidden shortcuts.
+1. 需求标题和用户目标。
+2. 设计状态：草案、用户已确认、阻塞、准备交给 workspace 评审。
+3. 最终完成定义。
+4. 已知事实和证据。
+5. 开放问题和已确认决策。
+6. 建议覆盖的仓库 / 窗口。
+7. 建议阶段顺序。
+8. 验证需求。
+9. 非目标和禁止捷径。
 
-The handoff should be clear enough that AlembicWorkspace can decide the next step without replaying the whole discussion.
+交接草案必须清楚到 `AlembicWorkspace` 不需要重放整段讨论，也能判断下一步。
 
-## Current Mainline Awareness
+## 当前主线意识
 
-AlembicDesign must not interrupt the active AlembicWorkspace mainline by default. If a new idea arrives while implementation is running, AlembicDesign may draft it and mark whether it is:
+默认情况下，`AlembicDesign` 不打断 `AlembicWorkspace` 当前主线。若实现主线进行中出现新想法，`AlembicDesign` 可以先起草，并标记它属于：
 
-- background discussion,
-- TODO candidate,
-- next-mainline candidate,
-- urgent blocker for the current mainline.
+- 背景讨论；
+- TODO 候选；
+- 下一主线候选；
+- 当前主线紧急阻塞。
 
-Only AlembicWorkspace can promote it into the current execution line.
+只有 `AlembicWorkspace` 能把它提升为当前执行主线。

@@ -1,40 +1,40 @@
-# <Requirement Title> Original Plan
+# <需求标题> 原始计划书
 
 日期：YYYY-MM-DD
 状态：草案
 维护窗口：AlembicDesign
 总控：AlembicWorkspace
 
-## User Goal
+## 用户目标
 
-Describe the user's request in plain language.
+用直接语言描述用户想要解决的问题或达成的目标。
 
-## Why Now
+## 为什么现在做
 
-Explain the problem, pain, or opportunity that makes this worth discussing.
+说明当前痛点、机会或触发原因。
 
-## Proposed Outcome
+## 期望结果
 
-Describe what should be true when the requirement is complete.
+描述需求完成后应该成立的事实。
 
-## Initial Scope
+## 初始范围
 
-In scope:
-
-- ...
-
-Out of scope:
+包含：
 
 - ...
 
-## Known Facts
+不包含：
 
 - ...
 
-## Open Questions
+## 已知事实
+
+- ...
+
+## 开放问题
 
 1. ...
 
-## Confirmation Needed
+## 需要确认
 
-This original plan is not an implementation plan. It needs user confirmation before detailed requirement design.
+本原始计划书不是实现计划。进入详细需求设计前，需要用户确认。
