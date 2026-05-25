@@ -9,6 +9,17 @@
 
 简要说明 `AlembicWorkspace` 需要评审什么。
 
+## 交接类型
+
+标记一项：
+
+- requirement-design
+- design-decision
+- research-result
+- bug-with-design-impact
+- todo-package-candidate
+- current-mainline-risk
+
 ## 用户已确认目标
 
 ...
@@ -23,17 +34,22 @@
 - 需求设计状态：
 - 代码事实状态：
 - 是否需要总控继续代码实现依赖调研：
+- 是否处于 detached-design-mode：
+- 与 AlembicWorkspace 当前主线关系：
 
 ## 建议下一步
 
 选择一项：
 
+- 接收为当前主线 bug / 返修候选。
 - 加入 TODO。
 - 在 AlembicWorkspace 启动原始计划确认。
 - 启动需求设计 / 代码调研。
 - 创建目标阶段确认。
 - 创建 wave 计划。
 - 暂停，等待用户确认。
+
+说明：本建议只给 `AlembicWorkspace` 评审，不是执行窗口提示词。
 
 ## 功能闭环摘要
 
@@ -47,14 +63,15 @@
 
 ## 建议仓库覆盖
 
-| 窗口 | 建议职责 | 依赖 |
-| --- | --- | --- |
-| Alembic |  |  |
-| AlembicCore |  |  |
-| AlembicAgent |  |  |
-| AlembicDashboard |  |  |
-| AlembicPlugin |  |  |
-| AlembicTest |  |  |
+| 窗口 | 建议状态 | 建议职责 | 依赖 / 阻塞 |
+| --- | --- | --- | --- |
+| Alembic | 参与 / 观察 / 无任务 / 待调研 |  |  |
+| AlembicCore | 参与 / 观察 / 无任务 / 待调研 |  |  |
+| AlembicAgent | 参与 / 观察 / 无任务 / 待调研 |  |  |
+| AlembicDashboard | 参与 / 观察 / 无任务 / 待调研 |  |  |
+| AlembicPlugin | 参与 / 观察 / 无任务 / 待调研 |  |  |
+| AlembicTest | 参与 / 观察 / 无任务 / 待调研 |  |  |
+| AlembicDesign | 设计完成 / 继续调研 / 无任务 |  |  |
 
 ## 证据与链接
 
@@ -83,3 +100,11 @@
 ## 给 AlembicWorkspace 的开放问题
 
 1. ...
+
+## 交接前自检
+
+- 已对照 `docs/workspace-alignment-checklist.md`：
+- 本 handoff 没有包含可复制实现窗口提示词：
+- 阶段仍为候选，未写成 wave：
+- TODO / Backlog 已列入证据与链接：
+- 如有删减、降级、延期、兼容保留或边界变化，已列为待确认：

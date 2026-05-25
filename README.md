@@ -8,6 +8,7 @@
 
 - 与用户讨论新需求，并把目标具体化。
 - 产出原始计划书、需求设计、设计笔记、方案对比和交接草案。
+- 将讨论中的 bug 线索、TODO 候选、调研请求或用户决策整理为轻量 signal，随时交回 `AlembicWorkspace`。
 - 识别缺失事实、决策点、风险、非目标、验证需求和 TODO / Backlog。
 - 请求或总结代码调研；证据不足时明确写成调研缺口，不编造实现链路。
 - 按总控成熟路线准备前置材料：原始计划书、用户确认、需求设计、代码实现依赖调研请求和交接草案。
@@ -26,6 +27,15 @@
 - [AGENTS.md](AGENTS.md)：设计窗口运行规则。
 - [docs/index.md](docs/index.md)：设计文档地图。
 - [docs/design-window-operating-policy.md](docs/design-window-operating-policy.md)：长期协作规则和交接契约。
+- [docs/workspace-alignment-checklist.md](docs/workspace-alignment-checklist.md)：与 `AlembicWorkspace` 总控需求设计能力的逐项对应检查。
 - [templates/original-plan-template.md](templates/original-plan-template.md)：原始计划书模板。
 - [templates/requirement-design-template.md](templates/requirement-design-template.md)：需求设计模板。
+- [templates/workspace-signal-template.md](templates/workspace-signal-template.md)：交回总控的轻量 bug / TODO / 调研 / 决策 signal 模板。
 - [templates/workspace-handoff-template.md](templates/workspace-handoff-template.md)：交回 `AlembicWorkspace` 的交接模板。
+
+## 工作模式
+
+- 在完整 `AlembicWorkspace` 中运行：读取父级总控文档，明确当前主线关系，再产出设计草案或 handoff。
+- 独立打开本仓库：只做 `detached-design-mode` 草案，不推断实现窗口状态，不把草案当成可执行计划。
+- 讨论中出现 bug / TODO / 调研请求：先产出轻量 signal，交给总控决定是否入账、派发或升级为主线。
+- 交给总控前：使用对齐检查清单确认目标、闭环、证据、TODO、阶段候选和确认问题都已经写入文档。
