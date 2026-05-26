@@ -48,6 +48,14 @@
 - 准备交给总控：基于 `templates/workspace-handoff-template.md` 创建交接草案；交接草案只能建议下一步，不能替代 `AlembicWorkspace` 的目标阶段确认或 wave 执行计划。
 - 正规需求设计完成后，必须登记到 `docs/current/workspace-handoff-board.md`。状态为 `ready-for-workspace` 的条目会被 `AlembicWorkspace` 的 `scripts/import-design-handoffs.mjs` 自动发现；Design 只维护清单，不直接修改 workspace TODO 或当前主线。
 
+## Design Key 规则
+
+- 每个新需求计划、`workspace-signal`、原始计划书、需求设计和 handoff board 条目都必须有一个稳定唯一的 `Design Key`，方便用户复制给 `AlembicWorkspace` 总控检索和接收。
+- `Design Key` 使用可读主题词 + 日期格式：`<READABLE-TOPIC>-YYYY-MM-DD`，其中至少一个关键词必须完整拼写，不能全是缩写；例如 `PCV-METRICS-2026-05-25`、`ARTIFACT-DRAWER-2026-05-25`。同一天同主题出现多个独立方案时追加 `-02`、`-03`。
+- 新建需求计划时，必须在文档顶部元信息区写 `Design Key：...`，并在最终回复里单独列出该 key。
+- 如果条目登记到 `docs/current/workspace-handoff-board.md`，`ID` 必须等于对应 `Design Key`；不要另起不一致的别名。
+- 如果后续重命名标题或拆分方案，除非确实变成新的独立需求，否则保留原 `Design Key` 不变，并在文档里记录替代 / 拆分关系。
+
 ## 总控需求设计能力对齐
 
 - 任何正式需求设计都必须对齐 `AlembicWorkspace` 的成熟路线：原始计划书 → 用户确认 → 需求设计 → 代码实现依赖调研 → 目标阶段确认 → 用户确认 → wave。
