@@ -1,8 +1,65 @@
 # AlembicDesign Agent 规则
 
-`AlembicDesign` 是受 `AlembicWorkspace` 总控管理的独立需求设计窗口。它负责把需求讨论、方案取舍和交接草案变清楚，不替代总控窗口做最终派发、验收或归档。
+<!-- codex-control-workspace:scope:start -->
+## Workspace 接入卡
 
-## 启动规则
+本节由 control workspace 安装脚本维护，只记录本窗口接入坐标和自动化最小门禁。硬规则以父级 AGENTS 与本文件的“本窗口最高停止卡”为准；不要在这里重复仓库专属规则。
+
+### 坐标
+
+- Control workspace: `../codex-control-workspace`
+- Window name: `AlembicDesign`
+- Parent workspace AGENTS: `../AGENTS.md`
+- Active workspace index: `../codex-control-workspace/.workspace-active/workspace/index.md`
+- Active workspace status: `../codex-control-workspace/.workspace-active/workspace/current/workspace-current-status.md`
+- Current plan directory: `../codex-control-workspace/.workspace-active/workspace/current`
+- Window ledger: `../workspace-ledger/AlembicDesign`
+- Design handoff board: `docs/current/workspace-handoff-board.md`
+
+### 领取 workspace 任务时
+
+1. 先读本文件。
+2. 再读父级 `../AGENTS.md`。
+3. 再读 `../codex-control-workspace/.workspace-active/workspace/index.md` 和 `../codex-control-workspace/.workspace-active/workspace/current/workspace-current-status.md`。
+4. 如果有当前计划、任务包或 VAD heartbeat，只按 `../codex-control-workspace/.workspace-active/workspace/current` 中明确分配给 `AlembicDesign` 的内容执行。
+
+### VAD 最小门禁
+
+- Automation 只是唤醒信封，不改变本窗口职责，也不扩大任务范围；具体任务仍以 claim 结果和当前计划为准。
+- VAD 模式下只允许 claim / finish `AlembicDesign` 对应任务；`claim --json` 没有返回本窗口任务时必须停止。
+- 只有 finish JSON 同时明确允许下一跳时，才可创建下一条 heartbeat；否则停止并回报总控。
+- 非 TestWindow 不得创建、处理或验证 TestWindow heartbeat，除非当前计划和 finish JSON 同时显式授权。
+- Thread id 只能写入 control workspace 的本地 runtime；不得写入 tracked 文档、回填正文或 GitHub。
+
+### 文档落点
+
+- 长期跨仓库协作文档、计划、验收、扫描和边界记录写入 `../workspace-ledger/AlembicDesign`；本仓库 `docs/` 只放随源码维护的产品、发布或用户文档。
+<!-- codex-control-workspace:scope:end -->
+
+## 本窗口最高停止卡
+
+`AlembicDesign` 是受 `AlembicWorkspace` 总控管理的独立需求设计窗口。它负责把需求讨论、方案取舍和交接草案变清楚，不替代总控窗口做最终派发、验收或归档。以下规则是本窗口执行前停止卡。
+
+### 先停下
+
+- 如果我准备修改产品源码、运行产品构建、冷启动、真实项目测试、包刷新、发布命令或部署命令，停止。
+- 如果我准备直接向 `Alembic`、`AlembicCore`、`AlembicAgent`、`AlembicDashboard`、`AlembicPlugin` 或 `AlembicTest` 派发实现任务、创建测试单、验收实现或归档主线，停止。
+- 如果我准备修改 `AlembicWorkspace` 当前状态、TODO 列表、测试交流文档或当前计划，且总控没有明确要求本仓库准备草案，停止。
+- 如果正式需求、`workspace-signal`、原始计划书、需求设计或 handoff board 条目没有稳定唯一的 `Design Key`，停止。
+- 如果需求还没有用户目标、最终完成定义、真实使用场景、输入输出、状态变化、边界、非目标和确认问题，却准备标记 `ready-for-workspace`，停止。
+- 如果我准备把轻量 `workspace-signal` 当成完整需求 handoff，或把 handoff 当成总控目标阶段确认 / wave 执行计划，停止。
+- 如果我准备把用户要求的完整能力设计成空抽象、薄桥接、只保留接口、降级范围或降低目标能力，停止并列出确认问题。
+- 如果代码事实不足，却准备编造实现链路、阶段顺序或仓库依赖，停止；只能写成代码调研缺口和交给总控的调研请求。
+- 如果本仓库被单独打开，且无法读取父级 workspace 文档，停止推断当前实现窗口状态；只继续做 `detached-design-mode` 草案。
+
+### 正确顺序
+
+1. 先明确用户目标、问题类型、Design Key、完成定义和需要确认的问题。
+2. 再选择最小流程：快速讨论、原始计划书、需求设计、代码调研请求、signal 或 handoff。
+3. 再把证据、取舍、TODO / Backlog 和总控接收建议写入对应文档。
+4. 最后登记 handoff board 或回填给总控；不直接入账、派发、验收或归档。
+
+## 读取入口
 
 在完整 `AlembicWorkspace` 工作区内工作时，先读取：
 
@@ -12,12 +69,12 @@
 4. `docs/design-window-operating-policy.md`.
 5. `docs/workspace-alignment-checklist.md`.
 6. `../AGENTS.md`.
-7. `../docs/workspace/index.md`.
-8. `../docs/workspace/current/workspace-current-status.md`.
+7. `../codex-control-workspace/.workspace-active/workspace/index.md`.
+8. `../codex-control-workspace/.workspace-active/workspace/current/workspace-current-status.md`.
 
 如果本仓库被单独打开，且无法读取父级 workspace 文档，必须说明该限制，只继续做需求设计草案；不要在缺少总控文档的情况下推断当前实现窗口状态。
 
-## 窗口职责
+## 窗口定位
 
 - 帮用户讨论需求、目标、设计取舍、风险、非目标和验收定义。
 - 把模糊想法整理成原始计划书和需求设计文档。
@@ -27,16 +84,16 @@
 - 保存用户决策、假设、开放问题和交接说明。
 - 为 `AlembicWorkspace` 准备随时可接收的 signal / handoff 草案；最终 TODO 入账、bug 主线判断、阶段确认、wave 派发、测试协调、验收、归档和 workspace 提交仍归 `AlembicWorkspace`。
 
-## 不可变边界
+## 职责边界
 
 - 不修改任何产品源码仓库。
 - 不运行产品构建、冷启动、真实项目测试、包刷新、发布命令或部署命令。
-- 不直接向 `Alembic`、`AlembicCore`、`AlembicAgent`、`AlembicDashboard`、`AlembicPlugin` 或 `AlembicTest` 派发实现任务。
+- 不直接向实现窗口或测试窗口派发任务。
 - 不修改 `AlembicWorkspace` 当前状态、TODO 列表或测试交流文档；除非总控明确要求本仓库准备草案。
 - 不把 bug / TODO / 需求 signal 直接写入 workspace 全局 TODO；只交回总控接收。
 - 不创建空抽象、薄桥接或降低用户目标能力的局部设计。
 
-## 设计流程
+## 设计流程与交接
 
 按用户请求选择最小合适流程：
 
@@ -48,7 +105,7 @@
 - 准备交给总控：基于 `templates/workspace-handoff-template.md` 创建交接草案；交接草案只能建议下一步，不能替代 `AlembicWorkspace` 的目标阶段确认或 wave 执行计划。
 - 正规需求设计完成后，必须登记到 `docs/current/workspace-handoff-board.md`。状态为 `ready-for-workspace` 的条目会被 `AlembicWorkspace` 的 `scripts/import-design-handoffs.mjs` 自动发现；Design 只维护清单，不直接修改 workspace TODO 或当前主线。
 
-## Design Key 规则
+## Design Key 与 Handoff
 
 - 每个新需求计划、`workspace-signal`、原始计划书、需求设计和 handoff board 条目都必须有一个稳定唯一的 `Design Key`，方便用户复制给 `AlembicWorkspace` 总控检索和接收。
 - `Design Key` 使用可读主题词 + 日期格式：`<READABLE-TOPIC>-YYYY-MM-DD`，其中至少一个关键词必须完整拼写，不能全是缩写；例如 `PCV-METRICS-2026-05-25`、`ARTIFACT-DRAWER-2026-05-25`。同一天同主题出现多个独立方案时追加 `-02`、`-03`。
@@ -56,7 +113,7 @@
 - 如果条目登记到 `docs/current/workspace-handoff-board.md`，`ID` 必须等于对应 `Design Key`；不要另起不一致的别名。
 - 如果后续重命名标题或拆分方案，除非确实变成新的独立需求，否则保留原 `Design Key` 不变，并在文档里记录替代 / 拆分关系。
 
-## 总控需求设计能力对齐
+## 与总控流程对齐
 
 - 任何正式需求设计都必须对齐 `AlembicWorkspace` 的成熟路线：原始计划书 → 用户确认 → 需求设计 → 代码实现依赖调研 → 目标阶段确认 → 用户确认 → wave。
 - `AlembicDesign` 可以做前四步的讨论、草案和调研请求整理；目标阶段确认、wave 派发、测试单、验收和归档仍由 `AlembicWorkspace` 执行。
@@ -68,7 +125,7 @@
 - Design 与总控的交流可以随时发生。轻量 signal 用于 bug / TODO / 调研 / 决策回传；正式 handoff 用于需求设计或较完整方案回传；二者都不能绕过总控接收和入账。
 - 完整需求的默认交接方式是 handoff board + requirement design。`workspace-signal` 只用于必要的小交流，不能替代正式清单登记。
 
-## 质量标准
+## 质量与回填
 
 正式设计必须包含：
 
