@@ -2,10 +2,11 @@
 
 Design Key：MULTI-REPOSITORY-INTERFACE-OPTIMIZATION-2026-05-28
 日期：2026-05-28
-状态：ready-for-workspace / maintenance requirement
+状态：ready-for-workspace / automation-ready maintenance requirement
 维护窗口：AlembicDesign
 总控：AlembicWorkspace
 来源：用户新增非业务维护需求
+自动化准备附录：[multi-repository-interface-optimization-automation-readiness-2026-05-30.md](multi-repository-interface-optimization-automation-readiness-2026-05-30.md)
 
 ## 用户原始目标
 
@@ -57,4 +58,6 @@ AlembicDesign 需求设计
 
 ## 建议下一步
 
-交给总控接收为维护型需求候选。总控接收后先做代码事实调研和接口面清单，再从真实失败证据或明确 producer / consumer 漂移中拆出第一批任务包。
+交给总控接收为维护型自动化候选。总控接收后先做 Stage 0 read-only interface inventory，不改代码；再从真实失败证据或明确 producer / consumer 漂移中拆出第一批 `Interface Dossier` 任务包。
+
+用户 2026-05-30 补充：计划自动化该需求。Design 已补自动化准备附录，明确自动化只能领取低歧义、可验证、单接口面的维护任务；没有 dossier 的接口优化不得进入无人值守实现。
