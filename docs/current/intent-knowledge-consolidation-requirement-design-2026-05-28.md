@@ -195,7 +195,7 @@ type IntentKnowledgeEvolutionBaseline = {
 
 总控先接收并评审 `AI-MOCK-REMOVAL-2026-05-28`。该前置需求完成或至少完成删除边界确认后，接收本需求，补一次轻量代码事实 / 证据复核，产出 `IntentKnowledgeEvolutionBaseline`。
 
-完成 baseline 后，再启动 `FILE-MONITOR-EVOLUTION-2026-05-28` 的 original plan 和 requirement design；`PLUGIN-FALLBACK-EVOLUTION-2026-05-28` 保持候选，等 038 的 proposal 语义稳定后再进入完整设计。
+完成 baseline 后，再启动 `FILE-MONITOR-EVOLUTION-2026-05-31` 的 Stage 0 代码事实 inventory；`PLUGIN-OPPORTUNISTIC-EVOLUTION-2026-05-31` 保持依赖 038 proposal / review 边界，等 038 语义稳定后再进入实现。
 
 ## 仍需确认
 

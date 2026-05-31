@@ -64,4 +64,4 @@ Design 做了轻量代码 / 文档扫描，发现 AI mock 不是单点：
 
 ## 建议下一步
 
-交给总控作为后续连续需求的最前置项。总控接收后应先做跨仓库代码事实调研，再决定 deletion wave。Design 建议执行顺序为：`AI-MOCK-REMOVAL-2026-05-28` -> `INTENT-KNOWLEDGE-CONSOLIDATION-2026-05-28` -> `FILE-MONITOR-EVOLUTION-2026-05-28` -> `PLUGIN-FALLBACK-EVOLUTION-2026-05-28`。
+交给总控作为后续连续需求的最前置项。总控接收后应先做跨仓库代码事实调研，再决定 deletion wave。Design 建议执行顺序为：`AI-MOCK-REMOVAL-2026-05-28` -> `INTENT-KNOWLEDGE-CONSOLIDATION-2026-05-28` -> `FILE-MONITOR-EVOLUTION-2026-05-31` -> `PLUGIN-OPPORTUNISTIC-EVOLUTION-2026-05-31`。

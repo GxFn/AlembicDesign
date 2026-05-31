@@ -56,8 +56,8 @@ Intent knowledge baseline 候选为：
 | 1 | `GTODO-2026-05-24-037` | `INTENT-RECOGNITION-2026-05-26` + `INTENT-KNOWLEDGE-2026-05-26` | completed / archived | 037 已成为 038 / 039 的前置事实。 |
 | 1.25 | 用户新增前置需求 | `AI-MOCK-REMOVAL-2026-05-28` | ready-for-workspace / user-confirmed | 在 037 收敛、038、039 之前删除产品 runtime AI mock，避免后续 Test 继续引用 mock path。 |
 | 1.5 | intent knowledge baseline | `INTENT-KNOWLEDGE-CONSOLIDATION-2026-05-28` | ready-for-workspace / gated-by-ai-mock-removal | 在 038 / 039 之前产出 `IntentKnowledgeEvolutionBaseline`，收束契约、证据等级、不可继承假设和风险归口；AI mock 删除是前置门禁。 |
-| 2 | `GTODO-2026-05-24-038` | `FILE-MONITOR-EVOLUTION-2026-05-28` | not-started | 等 037 收敛明确后讨论。 |
-| 3 | `GTODO-2026-05-24-039` | `PLUGIN-FALLBACK-EVOLUTION-2026-05-28` | not-started | 等 038 边界明确后讨论，且不能复制 038 的 daemon file monitor。 |
+| 2 | `GTODO-2026-05-24-038` | `FILE-MONITOR-EVOLUTION-2026-05-31` | ready-for-workspace / concrete-requirement | 已落实为独立需求；仍建议等待 `IntentKnowledgeEvolutionBaseline` 被总控接收后进入 Stage 0 代码事实 inventory。 |
+| 3 | `GTODO-2026-05-24-039` | `PLUGIN-OPPORTUNISTIC-EVOLUTION-2026-05-31` | ready-for-workspace / concrete-requirement | 已落实为独立需求；依赖 038 proposal / review 边界，且不能复制 038 daemon file monitor。 |
 
 ## 当前可交给总控的事项
 
@@ -81,7 +81,7 @@ Intent knowledge baseline 候选为：
 
 总控下一步建议：接收 AI mock 删除需求后，先做跨仓库代码事实调研和删除边界确认，再决定 deletion wave。不要直接派发 038 / 039。
 
-自动化领取建议：037 已归档；若总控正式入账，应只允许 `AI-MOCK-REMOVAL-2026-05-28` 作为新的最前置候选。038 / 039 保持未 ready，不进入自动化队列。
+自动化领取建议：037 已归档；038 / 039 已于 2026-05-31 落实为具体需求，但仍应由总控按依赖顺序接收。当前推荐顺序仍是 `AI-MOCK-REMOVAL-2026-05-28` -> `INTENT-KNOWLEDGE-CONSOLIDATION-2026-05-28` -> `FILE-MONITOR-EVOLUTION-2026-05-31` -> `PLUGIN-OPPORTUNISTIC-EVOLUTION-2026-05-31`。
 
 ## 037 分阶段执行建议
 
@@ -107,7 +107,13 @@ Intent knowledge baseline 候选为：
 
 ## 038 的后续讨论入口
 
-037 被总控接收并完成代码事实调研后，再讨论 `GTODO-2026-05-24-038`：
+`GTODO-2026-05-24-038` 已落实为：
+
+- Design Key：`FILE-MONITOR-EVOLUTION-2026-05-31`
+- 原始计划：[file-monitor-evolution-original-plan-2026-05-31.md](file-monitor-evolution-original-plan-2026-05-31.md)
+- 需求设计：[file-monitor-evolution-requirement-design-2026-05-31.md](file-monitor-evolution-requirement-design-2026-05-31.md)
+
+总控接收时仍需先做 Stage 0：
 
 - Alembic daemon file monitor 的真实生产方和消费方。
 - file change 如何触发 evolution candidate，而不是旧 VSCode 插件模式。
@@ -117,21 +123,27 @@ Intent knowledge baseline 候选为：
 
 ## 039 的后续讨论入口
 
-038 或至少 037 语义明确后，再讨论 `GTODO-2026-05-24-039`：
+`GTODO-2026-05-24-039` 已落实为：
+
+- Design Key：`PLUGIN-OPPORTUNISTIC-EVOLUTION-2026-05-31`
+- 原始计划：[plugin-opportunistic-evolution-original-plan-2026-05-31.md](plugin-opportunistic-evolution-original-plan-2026-05-31.md)
+- 需求设计：[plugin-opportunistic-evolution-requirement-design-2026-05-31.md](plugin-opportunistic-evolution-requirement-design-2026-05-31.md)
+
+总控接收时仍需先做 Stage 0：
 
 - Plugin 无 Alembic file monitor 时能使用哪些 host-agent 信号。
 - diff、Guard、search、submit 结果如何形成机会式 evolution proposal。
-- fallback 是否只做建议 / shout，还是允许 submit knowledge。
+- 第一版是否只做 proposal / hint，还是允许 pending candidate。
 - 如何保证不复制 Alembic daemon file monitor，也不绕过 ProjectScope。
 
 ## 禁止事项
 
 - 不把本索引交给总控当作执行计划。
-- 不把 038 / 039 标为 ready-for-workspace。
+- 不把 038 / 039 直接当作已入总控 TODO；Design 只完成 handoff，正式入账仍由总控裁决。
 - 不让自动化并行领取 037 / 038 / 039。
 - 不在 037 语义明确前为 038 / 039 自定义 intent。
 - 不修改 workspace 当前状态或全局 TODO。
 
 ## 建议总控下一步
 
-接收并评审 `AI-MOCK-REMOVAL-2026-05-28`。若总控认可该插队需求，先做跨仓库代码事实调研和目标阶段确认；完成或明确 AI mock 删除边界后，再推进 `INTENT-KNOWLEDGE-CONSOLIDATION-2026-05-28`。038 / 039 暂保持待讨论。
+接收并评审 `AI-MOCK-REMOVAL-2026-05-28`。若总控认可该插队需求，先做跨仓库代码事实调研和目标阶段确认；完成或明确 AI mock 删除边界后，再推进 `INTENT-KNOWLEDGE-CONSOLIDATION-2026-05-28`。038 / 039 已可作为后续独立需求接收，但建议不要跳过前置 baseline。

@@ -15,7 +15,7 @@ Design Key：KNOWLEDGE-EVOLUTION-FOLLOWUP-2026-05-28
 ## 当前判断类型
 
 - 类型：`new-requirement + current-mainline-risk + TODO + requirement-candidate + follow-up-design-plan`
-- 证据状态：037 已有总控归档和 Stage 0-6A 验收记录；AI mock 删除已有 Design 级轻量代码 / 文档证据，但尚未做总控完整代码事实调研；038 / 039 仍只有 TODO 级描述和 037 前置事实，尚未完成独立代码事实调研。
+- 证据状态：037 已有总控归档和 Stage 0-6A 验收记录；AI mock 删除已有 Design 级轻量代码 / 文档证据，但尚未做总控完整代码事实调研；038 / 039 已补 Design 级只读代码事实检查：[knowledge-evolution-038-039-code-fact-review-2026-05-31.md](knowledge-evolution-038-039-code-fact-review-2026-05-31.md)，但仍需总控或源仓库窗口复核后才能作为执行验收事实。
 - 总控状态：`GTODO-2026-05-24-037` 已完成已归档；AI mock 删除是用户新增插队需求，Design 建议先交给总控接收；intent knowledge baseline 已完成 Design 草案但需等待 AI mock 删除边界确认；038 / 039 在 global TODO 中为待排期 / 需独立确认。
 
 ## 可继承事实
@@ -42,8 +42,8 @@ Design Key：KNOWLEDGE-EVOLUTION-FOLLOWUP-2026-05-28
 | --- | --- | --- | --- | --- |
 | 0 | `AI-MOCK-REMOVAL-2026-05-28` | 用户新增前置需求 | 删除产品 runtime AI mock provider / mock bootstrap / mock cleanup / Dashboard mock mode，避免 Test 把 mock path 当成真实 runtime evidence。 | ready-for-workspace / user-confirmed |
 | 1 | `INTENT-KNOWLEDGE-CONSOLIDATION-2026-05-28` | intent knowledge baseline | 产出 `IntentKnowledgeEvolutionBaseline`，收束可继承契约、不可继承假设、未闭合风险和 038 / 039 消费边界。 | ready-for-workspace / gated-by-ai-mock-removal |
-| 2 | `FILE-MONITOR-EVOLUTION-2026-05-28` | `GTODO-2026-05-24-038` | Alembic file monitor evolution：基于本地文件变化触发知识进化候选 / proposal，并与 037 intent / evidence / source refs 对齐。 | 待讨论 / 待代码事实 |
-| 3 | `PLUGIN-FALLBACK-EVOLUTION-2026-05-28` | `GTODO-2026-05-24-039` | Plugin 无 file monitor 时的机会式知识进化：用 Codex host-agent 信号和 037 intent package 形成 evolution hint / proposal。 | 待讨论 / 依赖 038 边界 |
+| 2 | `FILE-MONITOR-EVOLUTION-2026-05-31` | `GTODO-2026-05-24-038` | Alembic file monitor evolution：基于本地文件变化触发知识进化候选 / proposal，并与 intent / evidence / source refs 对齐。 | ready-for-workspace / concrete-requirement |
+| 3 | `PLUGIN-OPPORTUNISTIC-EVOLUTION-2026-05-31` | `GTODO-2026-05-24-039` | Plugin 无 file monitor 时的机会式知识进化：用 Codex host-agent 可见信号和 intent package 形成 evolution hint / proposal。 | ready-for-workspace / gated-by-file-monitor-boundary |
 
 默认顺序调整为 AI mock 删除 -> 037 收敛 -> 038 -> 039。039 可以复用 038 的 evolution proposal 语义，但不得复制 Alembic daemon file monitor，也不得把 host-agent 机会信号伪装成真实文件监控。
 
@@ -193,13 +193,13 @@ host-agent task / tool signals
 
 ## 建议总控下一步
 
-建议 AlembicWorkspace 先接收并评审 `AI-MOCK-REMOVAL-2026-05-28`，把它作为 037 收敛、038、039 之前的前置清理需求。AI mock 删除完成或至少完成总控阶段边界确认后，再推进 `INTENT-KNOWLEDGE-CONSOLIDATION-2026-05-28`。该收敛需求完成后，再推进 `FILE-MONITOR-EVOLUTION-2026-05-28` 的 original plan 和 requirement design。039 保持候选，等 038 初版边界明确后再进入完整设计。
+建议 AlembicWorkspace 先接收并评审 `AI-MOCK-REMOVAL-2026-05-28`，把它作为 037 收敛、038、039 之前的前置清理需求。AI mock 删除完成或至少完成总控阶段边界确认后，再推进 `INTENT-KNOWLEDGE-CONSOLIDATION-2026-05-28`。该收敛需求完成后，再推进 `FILE-MONITOR-EVOLUTION-2026-05-31` 的 Stage 0 代码事实 inventory；039 已落实为 `PLUGIN-OPPORTUNISTIC-EVOLUTION-2026-05-31`，但建议等 038 proposal / review 边界明确后再实现。
 
 ## 仍需确认的问题
 
 - AI mock 删除是否作为总控最前置接收项直接插队到 037 收敛之前？Design 建议是。
 - 037 收敛需求是否需要单独交给总控接收，还是只作为 Design 内部前置材料？
-- 038 是否优先于 039 独立完成，还是希望 Design 同时并行起草两份需求设计？
-- 038 第一版结果是否只做 evolution proposal / hint，不自动 submit knowledge？
-- 039 第一版是否也只做 proposal / shout，还是允许在证据足够时进入 pending candidate？
+- 038 已独立完成需求设计；是否由总控立即接收，取决于 `IntentKnowledgeEvolutionBaseline` 是否已被接收。
+- 038 第一版建议只做 evolution proposal / hint，不自动 submit knowledge。
+- 039 已独立完成需求设计；第一版建议只做 proposal / hint，pending candidate 需总控或用户再确认。
 - 后续真实验证是否优先覆盖 038 file monitor runtime，还是先做 039 Plugin-only runtime smoke？
