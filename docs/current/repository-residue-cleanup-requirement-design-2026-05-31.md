@@ -2,8 +2,8 @@
 
 - Design Key：`REPOSITORY-RESIDUE-CLEANUP-2026-05-31`
 - 类型：bug / current-mainline-risk / requirement-candidate
-- 状态：ready-for-workspace
-- 证据状态：已完成只读代码事实检查；已先行完成可安全清理和最小修复；等待总控接收复核
+- 状态：archived
+- 证据状态：总控复核通过；已归档
 - 维护窗口：AlembicDesign
 - 建议接收窗口：AlembicWorkspace
 - 日期：2026-05-31
@@ -88,14 +88,28 @@
   - residue check / script docs / current plan sync / current layout / test boundary / TODO board / git diff whitespace passed。
   - 整体验证未通过，失败来自既有当前计划状态：缺失 `pcvm-workspace-plan-generation-2026-05-30.md` 链接、当前计划缺 `总控决策记录`、dispatch coverage / task package 校验失败，以及 `workspace-control.test` 读取真实当前计划后继承该失败。该失败不是本轮 residue 守卫或 Logger 修复引入。
 
+## 总控归档结论
+
+2026-05-31 总控已接收复核并归档。复核结论：
+
+- `node scripts/check-repository-residue.mjs --json` 返回 `ok=true`、`residueCount=0`、`blockingCount=0`。
+- `node --test scripts/check-repository-residue.test.mjs` 通过，2 tests passed。
+- `node scripts/check-script-docs.mjs` 通过。
+- `npm test -- test/LoggerRuntimeBoundary.test.ts` in `AlembicCore` 通过，1 test passed。
+- `node scripts/verify-control-center.mjs --with-script-tests --require-todo` 通过，66 workspace script tests passed。
+- `AlembicCore/src/infrastructure/logging/Logger.ts` 以及 `Alembic` / `AlembicPlugin` vendor copy 均包含源码仓库内不安全 `.asd/logs` 重定向到 `/tmp/alembic-dev/logs` 的边界。
+- 当前 residue 守卫已作为总控默认验证门禁保留。
+
+归档入口：`workspace-ledger/workspace/archive/2026-05/repository-residue-cleanup/`。
+
 ## 建议总控下一步
 
-1. 接收 `REPOSITORY-RESIDUE-CLEANUP-2026-05-31` 为 bugfix / workspace hygiene 项。
-2. 复核本轮改动涉及的仓库状态：`codex-control-workspace`、`AlembicCore`、`Alembic`、`AlembicPlugin`、`AlembicDesign`。
-3. 决定是否把 residue 检查作为后续总控常规验证门禁保留；Design 推荐保留默认检查。
-4. 若后续确实要允许某个项目使用 `.agents/skills`，必须由当前计划显式写入 `allowedResiduePaths` 或等价授权，不应靠本地残留静默存在。
+1. 已完成：接收 `REPOSITORY-RESIDUE-CLEANUP-2026-05-31` 为 bugfix / workspace hygiene 项。
+2. 已完成：复核本轮改动涉及的仓库状态和验证结果。
+3. 已完成：保留 residue 检查作为后续总控常规验证门禁。
+4. 后续若确实要允许某个项目使用 `.agents/skills`，必须由当前计划显式写入 `allowedResiduePaths` 或等价授权，不应靠本地残留静默存在。
 
 ## 仍需确认的问题
 
-- 总控是否接受 Design 本轮先行修复产品根因，还是需要拆成正式验收任务由对应源码窗口复核提交。
-- `BiliDili` 作为真实测试项目，后续是否允许任何 `.agents/skills` runtime projection；Design 推荐默认不允许，除非当前测试计划显式授权。
+- 总控已接受 Design 本轮先行修复产品根因，不再拆成额外源码窗口任务。
+- `BiliDili` 作为真实测试项目，默认不允许 `.agents/skills` runtime projection；除非当前测试计划显式授权。
