@@ -6,12 +6,15 @@ Design Key：MULTI-REPOSITORY-INTERFACE-OPTIMIZATION-2026-05-28
 维护窗口：AlembicDesign
 总控：AlembicWorkspace
 主需求设计：[multi-repository-interface-optimization-requirement-design-2026-05-28.md](multi-repository-interface-optimization-requirement-design-2026-05-28.md)
+breaking-cleanup 补充：[multi-repository-interface-optimization-breaking-cleanup-addendum-2026-06-01.md](multi-repository-interface-optimization-breaking-cleanup-addendum-2026-06-01.md)
 
 ## 判断类型
 
 这是现有 `MULTI-REPOSITORY-INTERFACE-OPTIMIZATION-2026-05-28` 的自动化准备补充，不是新需求，不新增流程架构，不直接派发实现窗口。
 
 目标是让总控后续可以把该需求作为无人值守维护型需求领取，但第一步仍必须是总控裁决后的只读事实清单。
+
+2026-06-01 更新：用户确认当前仍处于开发阶段，可以彻底清理兼容层。自动化安全边界因此从“保守兼容修复”调整为“有 canonical producer 和验证命令的 breaking compatibility cleanup”。旧路径、旧字段、旧函数名和旧 wrapper 可以作为删除对象，但不得删除真实业务能力或破坏持久化 / 发布 / 安装兼容而未经总控裁决。用户同时确认首批优先级为 `core-host-agent-workflow-contract`、`api-ai-runtime-contract`，确认 `API AI` 作为用户可见和 contract 统一口径，并确认 `external_agent` role id 可作为 `host_agent` breaking cleanup 候选。
 
 ## 自动化最终目标
 
@@ -55,6 +58,14 @@ Pick one Interface Area
 - `plugin-runtime-mcp-skill`
 - `agent-provider-contract`
 - `test-fixture-contract`
+
+2026-06-01 breaking-cleanup 首批可细化为：
+
+- `core-host-agent-workflow-contract`
+- `api-ai-runtime-contract`
+- `plugin-codex-mcp-runtime-layout`
+- `alembic-host-bridge-flat-paths`
+- `test-fixture-contract-followup`
 
 如果发现候选不属于这五类，先标为 `needs-control-decision`，不要自动化实现。
 
@@ -109,6 +120,7 @@ Stop condition:
 | `fixture-schema-align` | 产品 schema 明确，fixture 偏离真实 schema，修复不改变产品行为。 | AlembicTest fixture 使用旧 response shape。 | fixture schema check + product contract probe。 |
 | `export-boundary-fix` | public export 已存在但 consumer import path / package boundary 错误。 | AlembicCore export 可用，AlembicPlugin import 仍走内部路径。 | producer export list + consumer build / typecheck。 |
 | `contract-anchor-probe` | 只新增或更新可 diff 的只读 anchor，不改变 runtime 行为。 | 生成 API surface report 或 endpoint sample snapshot。 | anchor generation + no product diff except snapshot/report。 |
+| `breaking-compat-cleanup` | 最新 canonical contract 已明确，旧入口仅为兼容层，producer / consumer 验证和 negative guard 清楚。 | 删除 `External* -> HostAgent*` alias、旧 path re-export、旧字段 compatibility reader。 | producer build/typecheck + consumer typecheck/test + old token negative scan。 |
 
 这些任务共同要求：
 
@@ -117,14 +129,16 @@ Stop condition:
 - 必须有明确验证命令。
 - 必须能回填 commit / diff / command output / report path。
 - 不得改变用户可见行为。
+- 不得保留新旧双分支兼容，除非总控确认存在真实存量数据或发布兼容要求。
 
 ## 自动化必须停止的任务
 
 命中任一条件必须停止，交回总控裁决：
 
 - 需要新增产品能力。
-- 需要删除、降级、替换或迁移现有能力。
-- 需要把 contract 下沉到 `AlembicCore`。
+- 需要删除、降级、替换或迁移现有业务能力。
+- 删除对象可能承载持久化历史数据读取、已发布包、用户安装目录、runtime cache 或真实外部输入兼容。
+- 需要把 contract 下沉到 `AlembicCore`，但当前未确认 producer / consumer。
 - producer / consumer 谁是正确 contract 不清楚。
 - 多个 consumer 之间语义冲突。
 - 需要改 HTTP / resident API 的业务语义。
@@ -160,7 +174,8 @@ Stage 0 完成定义：
 
 - 选定 area 的主要 producer / consumer 被记录，或明确说明当前没有足够证据。
 - 每个候选都有文件路径证据。
-- 至少分出 `automation-safe`、`needs-control-decision`、`not-actionable` 三类。
+- 至少分出 `breaking-cleanup-safe`、`needs-control-decision`、`not-actionable` 三类。
+- 对 breaking cleanup 候选写清旧入口、canonical 替代、consumer 更新范围和 negative guard。
 - 不产生产品源码 diff。
 
 ### Stage 1：Pick One Minimal Dossier
@@ -169,10 +184,11 @@ Stage 0 完成定义：
 
 选择优先级：
 
-1. 已有 typecheck / build / targeted test 失败。
-2. 生成物明显落后源码且生成命令确定。
-3. fixture 明显偏离真实 schema。
-4. import/export boundary 错误且 producer export 已存在。
+1. 最新代码已经明确 canonical contract，旧兼容层仍残留。
+2. 已有 typecheck / build / targeted test 失败。
+3. 生成物明显落后源码且生成命令确定。
+4. fixture 明显偏离真实 schema。
+5. import/export boundary 错误且 producer export 已存在。
 
 禁止优先选择：
 
@@ -180,6 +196,7 @@ Stage 0 完成定义：
 - 最抽象接口面。
 - 需要多仓同时改的接口面。
 - 需要新增 shared contract 的接口面。
+- 只因为“命名更漂亮”但没有最新 canonical code 事实的接口面。
 
 Stage 1 完成定义：
 
@@ -199,6 +216,8 @@ Stage 1 完成定义：
 - 更新 fixture。
 - 修正 import/export path。
 - 补 targeted verification。
+- 删除旧路径 / 旧字段 / 旧函数名 / 旧 wrapper 兼容层。
+- 新增旧入口 negative guard。
 
 禁止：
 
@@ -207,6 +226,7 @@ Stage 1 完成定义：
 - 改多个无关 interface。
 - 为未来接口预留空字段 / 空 adapter。
 - 扩大到全仓重构。
+- 保留新旧双分支读取。
 
 Stage 2 完成定义：
 

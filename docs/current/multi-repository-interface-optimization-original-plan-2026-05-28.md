@@ -7,12 +7,15 @@ Design Key：MULTI-REPOSITORY-INTERFACE-OPTIMIZATION-2026-05-28
 总控：AlembicWorkspace
 来源：用户新增非业务维护需求
 自动化准备附录：[multi-repository-interface-optimization-automation-readiness-2026-05-30.md](multi-repository-interface-optimization-automation-readiness-2026-05-30.md)
+breaking-cleanup 补充：[multi-repository-interface-optimization-breaking-cleanup-addendum-2026-06-01.md](multi-repository-interface-optimization-breaking-cleanup-addendum-2026-06-01.md)
 
 ## 用户原始目标
 
 在现有 AlembicWorkspace 架构下新增一个需求，内容是多仓库之间的接口优化。该需求不新增流程架构，不重写自动化机制，只利用当前 Design handoff、总控 TODO、VAD 自动化领取和各仓库窗口回填验收的既有模式。
 
 用户希望这类需求后续可以成为“不需要大量指导、可无人值守推进”的维护型任务来源，例如各仓库之间的接口优化。
+
+2026-06-01 用户补充裁决：Alembic 主体和 AlembicPlugin 已完成文件名、方法名、文件夹层级歧义修正和层级整理；当前仍处于开发阶段，可以彻底清理兼容层。该需求应按照最新代码修改去除兼容层，保持接口契约干净整洁，没有冗余兼容分叉。
 
 ## 判断类型
 
@@ -51,13 +54,16 @@ AlembicDesign 需求设计
 
 - 不设计新的自动化流程架构。
 - 不新增业务功能。
-- 不删除、迁移、降级或替换产品能力。
+- 不删除、迁移、降级或替换真实产品能力。
+- 不保留仅服务旧命名、旧路径、旧字段或旧目录的兼容分叉；开发期允许 breaking cleanup。
 - 不为未来可能需要创建空 interface、空 provider、空 adapter。
-- 不做大规模重构、抽象、拆仓或合仓。
-- 不把没有失败证据或没有真实消费方的“接口美化”当作可执行任务。
+- 不做与当前 canonical contract 无关的大规模重构、抽象、拆仓或合仓。
+- 不把没有最新代码事实、失败证据或真实消费方的“接口美化”当作可执行任务。
 
 ## 建议下一步
 
-交给总控接收为维护型自动化候选。总控接收后先做 Stage 0 read-only interface inventory，不改代码；再从真实失败证据或明确 producer / consumer 漂移中拆出第一批 `Interface Dossier` 任务包。
+交给总控接收为维护型 breaking-cleanup 自动化候选。总控接收后先做 Stage 0 read-only interface inventory，不改代码；再从最新 canonical code 事实、真实失败证据、明确 producer / consumer 漂移或旧兼容层残留中拆出第一批 `Interface Dossier` 任务包。
 
 用户 2026-05-30 补充：计划自动化该需求。Design 已补自动化准备附录，明确自动化只能领取低歧义、可验证、单接口面的维护任务；没有 dossier 的接口优化不得进入无人值守实现。
+
+用户 2026-06-01 补充：开发阶段允许彻底清理兼容层。Design 已补 breaking-cleanup 设计，建议总控首个 area 选择 `core-host-agent-workflow-contract`，然后推进 `api-ai-runtime-contract`。
